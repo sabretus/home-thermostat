@@ -26,7 +26,7 @@ float humidity, temperature;  // Values read from sensor
 unsigned long previousMillis = 0;        // will store last temp was read
 const long interval = 2000;              // interval at which to read sensor
 
-const char* host = "hgwx.hopto.org"; // Your domain  
+const char* host = ""; // Your domain  
 String path = "/py-cgi/sender.py";
 String sensorId = "?sensorid=esp8266_001"; // uniq sensor ID
 String tempKey = "&temp=";
