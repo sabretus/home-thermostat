@@ -8,7 +8,7 @@ from pyzabbix import ZabbixMetric, ZabbixSender
 import urllib2
 
 thingspeak_base_url = 'http://api.thingspeak.com/update'
-thingspeak_key = 'POE1P1ZGONI9H7O2'
+thingspeak_key = ''
 
 base_dir = '/sys/bus/w1/devices/'
 # base_dir = './devices/'
