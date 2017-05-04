@@ -50,6 +50,7 @@ try:
     # Send data to Thingspeak channel
     url = "%s?key=%s&field1=%s&field2=%s" % (thingspeak_base_url,thingspeak_key,air_pi_temp,circuit_pi_temp)
     # print url
+    # here is our test comment
     urllib2.urlopen(url).read()
 
 except read_temp.Error, e:
