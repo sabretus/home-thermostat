@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import glob
 import time
 from pyzabbix import ZabbixMetric, ZabbixSender
@@ -10,12 +11,27 @@ import urllib2
 thingspeak_base_url = 'http://api.thingspeak.com/update'
 thingspeak_key = ''
 
+# file contain dummy temp 33.333 to indicate that collector
+# filed to get data from real sensor device file
+dummy_sensor_folder = '/usr/local/tmp'
+
 base_dir = '/sys/bus/w1/devices/'
 # base_dir = './devices/'
-circuit_sensor_folder = glob.glob(base_dir + '28-03*')[0]
+
+# Water circuit
+try:
+    circuit_sensor_folder = glob.glob(base_dir + '28-03*')[0]
+except IndexError:
+    circuit_sensor_folder = dummy_sensor_folder
+
 circuit_sensor_file = circuit_sensor_folder + '/w1_slave'
 
-air_sensor_folder = glob.glob(base_dir + '28-04*')[0]
+# Air
+try:
+    air_sensor_folder = glob.glob(base_dir + '28-04*')[0]
+except IndexError:
+    air_sensor_folder = dummy_sensor_folder
+
 air_sensor_file = air_sensor_folder + '/w1_slave'
 
 def read_temp_raw(device_file):
@@ -25,6 +41,7 @@ def read_temp_raw(device_file):
     return lines
 
 def read_temp(sensor_file):
+    print ("reading {}".format(sensor_file))
     lines = read_temp_raw(sensor_file)
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
@@ -52,6 +69,6 @@ try:
     # print url
     urllib2.urlopen(url).read()
 
-except read_temp.Error, e:
-    print "Error %d: %s" % (e.args[0],e.args[1])
+except:
+    print "Unexpected error:", sys.exc_info()[0]
     sys.exit(1)
