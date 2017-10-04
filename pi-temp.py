@@ -6,10 +6,6 @@ import sys
 import glob
 import time
 from pyzabbix import ZabbixMetric, ZabbixSender
-import urllib2
-
-thingspeak_base_url = 'http://api.thingspeak.com/update'
-thingspeak_key = ''
 
 # file contain dummy temp 33.333 to indicate that collector
 # filed to get data from real sensor device file
@@ -63,11 +59,6 @@ try:
     packet = [ ZabbixMetric('Zabbix server', 'furnance.sensor.one', air_pi_temp),
                ZabbixMetric('Zabbix server', 'furnance.circuit.input', circuit_pi_temp), ]
     result = ZabbixSender(use_config=True).send(packet)
-
-    # Send data to Thingspeak channel
-    url = "%s?key=%s&field1=%s&field2=%s" % (thingspeak_base_url,thingspeak_key,air_pi_temp,circuit_pi_temp)
-    # print url
-    urllib2.urlopen(url).read()
 
 except:
     print "Unexpected error:", sys.exc_info()[0]
