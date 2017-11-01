@@ -1,0 +1,1276 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_ZABBIXDATA",
+      "label": "ZabbixData",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "alexanderzobnin-zabbix-datasource",
+      "pluginName": "Zabbix"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "alexanderzobnin-zabbix-triggers-panel",
+      "name": "Zabbix Triggers",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.0.2"
+    },
+    {
+      "type": "datasource",
+      "id": "alexanderzobnin-zabbix-datasource",
+      "name": "Zabbix",
+      "version": "1.0.0"
+    }
+  ],
+  "id": null,
+  "title": "Furnace",
+  "tags": [],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "sharedCrosshair": false,
+  "hideControls": false,
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  },
+  "refresh": false,
+  "schemaVersion": 13,
+  "version": 96,
+  "links": [],
+  "gnetId": null,
+  "rows": [
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "ackEventColor": "rgba(0, 0, 0, 0)",
+          "ageField": true,
+          "datasource": "${DS_ZABBIXDATA}",
+          "editable": true,
+          "error": false,
+          "fontSize": "100%",
+          "hideHostsInMaintenance": false,
+          "hostField": true,
+          "id": 3,
+          "infoField": true,
+          "lastChangeField": true,
+          "limit": 10,
+          "links": [],
+          "okEventColor": "rgba(0, 245, 153, 0.45)",
+          "pageSize": 10,
+          "scroll": true,
+          "severityField": false,
+          "showEvents": {
+            "text": "Problems",
+            "value": "1"
+          },
+          "showTriggers": "all triggers",
+          "sortTriggersBy": {
+            "text": "last change",
+            "value": "lastchange"
+          },
+          "span": 12,
+          "statusField": false,
+          "title": "State",
+          "transparent": true,
+          "triggerSeverity": [
+            {
+              "color": "#B7DBAB",
+              "priority": 0,
+              "severity": "Not classified",
+              "show": true
+            },
+            {
+              "color": "#82B5D8",
+              "priority": 1,
+              "severity": "Information",
+              "show": true
+            },
+            {
+              "color": "#E5AC0E",
+              "priority": 2,
+              "severity": "Warning",
+              "show": true
+            },
+            {
+              "color": "#C15C17",
+              "priority": 3,
+              "severity": "Average",
+              "show": true
+            },
+            {
+              "color": "#BF1B00",
+              "priority": 4,
+              "severity": "High",
+              "show": true
+            },
+            {
+              "color": "#890F02",
+              "priority": 5,
+              "severity": "Disaster",
+              "show": true
+            }
+          ],
+          "triggers": {
+            "application": {
+              "filter": ""
+            },
+            "group": {
+              "filter": ""
+            },
+            "host": {
+              "filter": ""
+            },
+            "trigger": {
+              "filter": ""
+            }
+          },
+          "type": "alexanderzobnin-zabbix-triggers-panel"
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 103,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(45, 101, 172, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "format": "celsius",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": true,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 9,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 4,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Furnance2"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": "30,70",
+          "title": "Water circuit",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(45, 106, 172, 0.97)",
+            "rgba(40, 237, 43, 0.89)",
+            "rgba(245, 143, 54, 0.9)"
+          ],
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "format": "celsius",
+          "gauge": {
+            "maxValue": 40,
+            "minValue": 10,
+            "show": true,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 11,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 4,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Room sensors avg temperature"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": "19,31",
+          "title": "AVG temperature",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(45, 80, 172, 0.97)",
+            "rgba(76, 200, 18, 0.89)",
+            "rgba(245, 119, 54, 0.9)"
+          ],
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 1,
+          "editable": true,
+          "error": false,
+          "format": "celsius",
+          "gauge": {
+            "maxValue": 30,
+            "minValue": 15,
+            "show": true,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 8,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "repeat": null,
+          "span": 4,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Furnance1"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": "19,26",
+          "title": "Kitchen AIR",
+          "transparent": true,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 266,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "aliasColors": {
+            "Furnance2": "#BF1B00"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 2,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Furnance1",
+              "yaxis": 2
+            },
+            {
+              "alias": "Furnance2",
+              "yaxis": 2
+            }
+          ],
+          "span": 4,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Furnance2"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Water circuit",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            },
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Room sensors avg temperature": "#7EB26D"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 10,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Room sensors avg temperature",
+              "yaxis": 2
+            }
+          ],
+          "span": 4,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Room sensors avg temperature"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Sensors AVG temperature",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            },
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Furnance1": "#EF843C"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 1,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Furnance1",
+              "yaxis": 2
+            }
+          ],
+          "span": 4,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Furnance1"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Kitchen AIR",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            },
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 290,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "aliasColors": {
+            "ESP8266_001 humidity": "#0A437C",
+            "ESP8266_001 temperature": "#E0752D"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 4,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "ESP8266_001 temperature",
+              "yaxis": 2
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "ESP8266_001 temperature"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            },
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "ESP8266_001 humidity"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "SENSOR #1 (AIR, Humidity)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "humidity",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "ESP8266_002 humidity": "#0A437C",
+            "ESP8266_002 temperature": "#E0752D"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "decimals": 2,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 5,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "ESP8266_002 temperature",
+              "yaxis": 2
+            },
+            {
+              "alias": "ESP8266_002 humidity",
+              "yaxis": 1
+            }
+          ],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "ESP8266_002 temperature"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            },
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "ESP8266_002 humidity"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "SENSOR #2 (AIR, Humidity)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "humidity",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 293,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    },
+    {
+      "title": "Dashboard Row",
+      "panels": [
+        {
+          "aliasColors": {
+            "Outside humidity": "#1F78C1",
+            "Outside temperature": "#EF843C"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 6,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Outside temperature",
+              "yaxis": 2
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Outside temperature"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            },
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Outside humidity"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Outside weather (AIR, Humidity)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "humidity",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Outside humidity": "#0A437C",
+            "Outside pressure": "#64B0C8",
+            "Outside temperature": "#E24D42"
+          },
+          "bars": false,
+          "datasource": "${DS_ZABBIXDATA}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 7,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Outside temperature",
+              "yaxis": 2
+            },
+            {
+              "alias": "Outside pressure",
+              "yaxis": 2
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Furnace"
+              },
+              "functions": [],
+              "group": {
+                "filter": "Zabbix servers"
+              },
+              "host": {
+                "filter": "Zabbix server"
+              },
+              "item": {
+                "filter": "Outside pressure"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Outside weather (Pressure)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "pressurembar",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "pressurembar",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "showTitle": false,
+      "titleSize": "h6",
+      "height": 343,
+      "repeat": null,
+      "repeatRowId": null,
+      "repeatIteration": null,
+      "collapse": false
+    }
+  ]
+}
