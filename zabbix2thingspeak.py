@@ -12,11 +12,13 @@ zabix_server = 'http://localhost/zabbix'
 zapi = ZabbixAPI(zabix_server, user='', password='')
 item_ids = ['23842', '23727']
 temp = []
+history = []
 
 # Query item's history (integer) data
-history = zapi.history.get(itemids=item_ids,
+for id in item_ids:
+    history += zapi.history.get(itemids=id,
                            output='extend',
-                           limit='2',
+                           limit='1',
                            history=0,
                            sortfield='clock',
                            sortorder='DESC',
