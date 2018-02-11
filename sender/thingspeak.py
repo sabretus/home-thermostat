@@ -8,7 +8,7 @@ import urllib2
 print "Content-type: text/html\n\n"
 
 thingspeak_base_url = 'http://api.thingspeak.com/update'
-thingspeak_key = 'POE1P1ZGONI9H7O2'
+thingspeak_key = ''
 zabix_server = 'http://zabbix-web-apache-mysql/'
 
 zapi = ZabbixAPI(zabix_server, user='api', password='api')
