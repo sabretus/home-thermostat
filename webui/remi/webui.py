@@ -1,10 +1,13 @@
 import remi.gui as gui
 from remi import start, App
 from ConfigParser import SafeConfigParser
-from updatetmp import updatetmp
-from subprocess import call
+from updatetemp import updatetmp
+import subprocess
 
-config_path = '/tmp/config.ini'
+config_path = '/opt/remiui/config.ini'
+furnace_api = 'http://192.168.0.99/api/relay2'
+furnace_turn_on = "/usr/bin/wget -q --post-data 'state=1' -O - " + furnace_api
+furnace_turn_off = "/usr/bin/wget -q --post-data 'state=0' -O - " + furnace_api
 
 def update_config(key, value):
     config = SafeConfigParser()
@@ -17,10 +20,19 @@ class MyApp(App):
     def __init__(self, *args):
         super(MyApp, self).__init__(*args)
 
+    def seq(start, stop, step=1):
+        n = int(round((stop - start)/float(step)))
+        if n > 1:
+            return([start + step*i for i in range(n+1)])
+        elif n == 1:
+            return([start])
+        else:
+            return([])
+
     def main(self):
         container = gui.VBox(width=300, height=350, margin='0px auto')
 
-        templist = [ '16 C*', '17 C*', '18 C*', '19 C*', '20 C*', '21 C*', '22 C*', '23 C*' ]
+        templist = seq(16, 24, 0.2)
         timelistNightBegin = [ '01:00',  '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00' ]
         timelistNightEnd = [ '01:00',  '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00' ]
         timelistDayBegin = [ '13:00',  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00' ]
@@ -73,15 +85,15 @@ class MyApp(App):
     def drop_down_changed_temp(self, widget, value):
         update_config('temp', value)
         self.bt.set_text('Home temperature set to: ' + value)
-        call (["relay_off.py"])
+        subprocess.call(furnace_turn_off, shell=True)
         updatetmp(config_path)
 
     def drop_down_changed_state(self, widget, value):
         if value == 'Turn ON':
-            call (["relay_on.py"])
+            subprocess.call(furnace_turn_on, shell=True)
             self.bt.set_text('WARNING!!!, HEATING ENABLED MANUALLY')
         else:
-            call (["relay_off.py"])
+            subprocess.call(furnace_turn_off, shell=True)
             self.bt.set_text('Heating turned off manually')
 
     def drop_down_changed_time_day_begin(self, widget, value):
@@ -105,4 +117,5 @@ class MyApp(App):
         updatetmp(config_path)
 
 # starts the webserver
-start(MyApp, address='0.0.0.0', start_browser=False)
+start(MyApp, address='0.0.0.0', port=8082, host_name='192.168.0.190',  websocket_port=45607, start_browser=False)
+

@@ -1,0 +1,169 @@
+version: '2'
+services:
+  zabbix-server:
+    restart: always
+    image: quay.io/sabretus/zabbix-server:ubuntu-3.4-latest
+    ports:
+      - "10051:10051"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./zbx_env/usr/lib/zabbix/alertscripts:/usr/lib/zabbix/alertscripts:ro
+      - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+      - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+      - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+      - ./zbx_env/var/lib/zabbix/mibs:/var/lib/zabbix/mibs:ro
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    mem_limit: 512m
+    env_file:
+      - .env_db_mysql
+      - .env_srv
+    user: root
+    networks:
+      zbx_net:
+        aliases:
+          - zabbix-server
+          - zabbix-server-mysql
+          - zabbix-server-ubuntu-mysql
+          - zabbix-server-mysql-ubuntu
+    labels:
+     com.zabbix.description: "Zabbix server with MySQL database support"
+     com.zabbix.company: "Zabbix SIA"
+     com.zabbix.component: "zabbix-server"
+     com.zabbix.dbtype: "mysql"
+     com.zabbix.os: "ubuntu"
+
+  zabbix-web-apache-mysql:
+    restart: always
+    image: quay.io/sabretus/zabbix-web-apache-mysql:ubuntu-3.4-latest
+    ports:
+      - "8081:80"
+      - "8443:443"
+    mem_limit: 512m
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./zbx_env/etc/ssl/apache2:/etc/ssl/apache2:ro
+    env_file:
+      - .env_db_mysql
+      - .env_web
+    user: root
+    networks:
+      zbx_net:
+        aliases:
+          - zabbix-web-apache-mysql
+          - zabbix-web-apache-ubuntu-mysql
+          - zabbix-web-apache-mysql-ubuntu
+    labels:
+      com.zabbix.description: "Zabbix frontend on Apache web-server with MySQL database support"
+      com.zabbix.company: "Zabbix SIA"
+      com.zabbix.component: "zabbix-frontend"
+      com.zabbix.webserver: "apache2"
+      com.zabbix.dbtype: "mysql"
+      com.zabbix.os: "ubuntu"
+
+  zabbix-agent:
+    restart: always
+    image: zabbix/zabbix-agent:ubuntu-3.4-latest
+    ports:
+      - "10050:10050"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./zbx_env/etc/zabbix/zabbix_agentd.d:/etc/zabbix/zabbix_agentd.d:ro
+      - ./zbx_env/var/lib/zabbix/modules:/var/lib/zabbix/modules:ro
+      - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
+      - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
+    env_file:
+      - .env_agent
+    user: root
+    privileged: true
+    pid: "host"
+    networks:
+      zbx_net:
+        aliases:
+          - zabbix-agent
+          - zabbix-agent-passive
+          - zabbix-agent-ubuntu
+    labels:
+      com.zabbix.description: "Zabbix agent"
+      com.zabbix.company: "Zabbix SIA"
+      com.zabbix.component: "zabbix-agentd"
+      com.zabbix.os: "ubuntu"
+
+  mysql-server:
+    restart: always
+    image: mysql:5.7
+    command: [mysqld, --character-set-server=utf8, --collation-server=utf8_bin]
+    volumes_from:
+      - db_data_mysql
+    volume_driver: local
+    env_file:
+      - .env_db_mysql
+    user: root
+    networks:
+      zbx_net:
+        aliases:
+          - mysql-server
+          - zabbix-database
+          - mysql-database
+
+  # Third-party services
+  remiui:
+    restart: always
+    image: quay.io/sabretus/remiui:v1
+    networks:
+      zbx_net:
+        aliases:
+          - remiui
+    ports:
+      - "8082:8082"
+      - "45607:45607"
+
+  zabbix-sender:
+    restart: always
+    image: quay.io/sabretus/zabbix-sender:v1.1
+    networks:
+      zbx_net:
+        aliases:
+          - zabbix-sender
+    ports:
+      - "80:80"
+
+  grafana:
+    restart: always
+    image: grafana/grafana:4.6.3
+    networks:
+      zbx_net:
+        aliases:
+          - grafana
+    ports:
+      - "3000:3000"
+    volumes_from:
+      - db_data_grafana
+
+  db_data_mysql:
+    image: busybox
+    volumes:
+      - /opt/zbx_env/mysql:/var/lib/mysql:rw
+
+  db_data_grafana:
+    image: busybox
+    volumes:
+      - /opt/zbx_env/grafana:/var/lib/grafana:rw
+
+networks:
+  zbx_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
+

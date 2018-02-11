@@ -16,6 +16,12 @@ temp = form.getvalue('temp')
 hum = form.getvalue('hum')
 sensorid = form.getvalue('sensorid')
 
+# Furnace sensor pass ID via Humidty value (there are no Humidty sensors)
+if (sensorid == 'furnace' and hum == '1.00'):
+	sensorid = 'furnace.1'
+elif (sensorid == 'furnace' and hum == '0.00'):
+	sensorid = 'furnace.0'
+
 print "<h2>Received data:</h2>"
 
 print "Sensor ID: "+sensorid+"<br>"
@@ -23,11 +29,13 @@ print "Temperature: "+temp+"C<br>"
 print "Humidty: "+hum+"%<br>"
 
 packet = [
-	ZabbixMetric('Zabbix server', 'room.sensor.'+sensorid+'.temp', temp),
-	ZabbixMetric('Zabbix server', 'room.sensor.'+sensorid+'.hum', hum),
+	ZabbixMetric('Microserver', 'room.sensor.'+sensorid+'.temp', temp),
+	ZabbixMetric('Microserver', 'room.sensor.'+sensorid+'.hum', hum),
 ]
 
 print packet
 
-result = ZabbixSender(use_config=True).send(packet)
+result = ZabbixSender(use_config=False, zabbix_server='zabbix-server').send(packet)
+
+print result
 
