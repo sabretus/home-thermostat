@@ -4,7 +4,7 @@
 # Send data to zabbix using GET request, example:
 # sender.py?sensorid=esp8266_001&temp=10&hum=25
 #
-
+import sys
 import cgi
 from pyzabbix import ZabbixMetric, ZabbixSender
 
@@ -22,8 +22,10 @@ if (sensorid == 'furnace' and hum == '1.00'):
 elif (sensorid == 'furnace' and hum == '0.00'):
 	sensorid = 'furnace.0'
 
-print "<h2>Received data:</h2>"
+if temp == 'nan':
+    sys.exit()
 
+print "<h2>Received data:</h2>"
 print "Sensor ID: "+sensorid+"<br>"
 print "Temperature: "+temp+"C<br>"
 print "Humidty: "+hum+"%<br>"
@@ -38,4 +40,3 @@ print packet
 result = ZabbixSender(use_config=False, zabbix_server='zabbix-server').send(packet)
 
 print result
-

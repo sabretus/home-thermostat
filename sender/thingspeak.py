@@ -12,7 +12,7 @@ thingspeak_key = ''
 zabix_server = 'http://zabbix-web-apache-mysql/'
 
 zapi = ZabbixAPI(zabix_server, user='api', password='api')
-item_ids = ['28298', '28299']
+item_ids = ['28299', '28298']
 temp = []
 history = []
 
@@ -30,8 +30,7 @@ for point in history:
     temp.append(point['value'])
 
 # Form url, field1 = air, field2 = water circuit
-url = "%s?key=%s&field1=%s&field2=%s" % (thingspeak_base_url,thingspeak_key,temp[1],temp[0])
+url = "%s?key=%s&field1=%s&field2=%s" % (thingspeak_base_url, thingspeak_key, temp[0], temp[1])
 print url
 # Send data to Thingspeak channel
 urllib2.urlopen(url).read()
-
